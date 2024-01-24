@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .phones {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+      .phone {
+        border: 2px solid blue;
+        width: fit-content;
+      }
+      img {
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="phones"></div>
+
+    <script>
+      async function getphones() {
+        const response = await fetch("https://dummyjson.com/products");
+        const data = await response.json();
+
+        let phones = data.products;
+
+        const products = phones
+          .map(function (ele) {
+            return `<div class="phone">
+                <h2>${ele.title}</h2>
+                <img src="${ele.thumbnail}" alt = ":)">
+                </div>
+                `;
+          })
+          .join("");
+        document.querySelector(".phones").innerHTML = products;
+      }
+      getphones();
+    </script>
+  </body>
+</html>
